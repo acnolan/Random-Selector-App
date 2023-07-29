@@ -1,7 +1,10 @@
 .spinner {
     position: relative;
     width: 500px;
-    height: 500px; /*Make width and height more dynamic*/
+    height: 500px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .spinner:after {
@@ -9,9 +12,9 @@
     content: '';
     width: 32px;
     height: 32px;
-    background: url('images/leftChevron.svg') no-repeat;
-    background-size: 32px;
-    right: -30px;
+    background: url('../images/leftChevron.svg') no-repeat;
+    background-size: contain;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -22,27 +25,30 @@
 
 @keyframes animateArrow{
     50%{
-        right: -40px;
+        right: 0px;
     }
 }
 
-
-
 .wheel {
-    width: 100%;
-    height: 100%;
+    width: 85%;
+    height: 85%;
     position: relative;
     border-radius: 50%;
-    border: 10px solid #fff;
+    margin: 10px;
     overflow: hidden;
     transition: all ease 5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-span {
+.wedge {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(50% 50%, 50% 0, 100% 0);
+    width: 500px;
+    height: 500px;
+}
+
+.wedgeText {
+    position: absolute;
+    color: white;
 }
