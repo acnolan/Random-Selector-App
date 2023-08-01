@@ -1,7 +1,7 @@
 .spinner {
     position: relative;
-    width: 500px;
-    height: 500px; 
+    width: 600px;
+    height: 600px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,7 +14,7 @@
     height: 32px;
     background: url('../images/leftChevron.svg') no-repeat;
     background-size: contain;
-    right: 10px;
+    right: 60px;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -25,13 +25,13 @@
 
 @keyframes animateArrow{
     50%{
-        right: 0px;
+        right: 50px;
     }
 }
 
 .wheel {
-    width: 85%;
-    height: 85%;
+    width: 70%;
+    height: 70%;
     position: relative;
     border-radius: 50%;
     margin: 10px;
@@ -44,8 +44,8 @@
 
 .wedge {
     position: absolute;
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
 }
 
 .wedgeText {

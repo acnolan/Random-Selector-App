@@ -2,11 +2,7 @@
 // Ideally would like it to work with 4+, two special cases is more manageable
 const options = [
     '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6'
+    '2'
 ];
 
 function setUpSpinner() {
@@ -16,17 +12,33 @@ function setUpSpinner() {
     const wheel = document.getElementById('wheel');
 
     options.forEach(option => {
-        const element = document.createElement('span');
-        element.className = 'wedge'; 
-        element.style.clipPath = generateClipPath(50, currentDegree, currentDegree+degreeIncrement);
-        element.style.backgroundColor = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
-        wheel.appendChild(element);
+        if (options.length > 2) {
+            createWedge(wheel, option, currentDegree, degreeIncrement);
+        } else if (options.length === 2) {
+            drawTwoWedges(wheel, option, currentDegree);
+        } else {
 
-
-        element.appendChild(_createWedgeText(option, currentDegree, degreeIncrement));
+        }
 
         currentDegree += degreeIncrement;
     });
+}
+
+function createWedge(wheel, option, ) {
+    const element = document.createElement('span');
+    element.className = 'wedge'; 
+    element.style.clipPath = generateClipPath(50, currentDegree, currentDegree+degreeIncrement);
+    element.style.backgroundColor = generateRandomColor();
+
+    // The math doesn't work for 2 or 3 wedges, so we need special cases
+    if (options.length === 3) {
+        element.style.width = '900px';
+        element.style.height = '900px';
+    }
+
+    wheel.appendChild(element);
+
+    element.appendChild(_createWedgeText(option, currentDegree, degreeIncrement));
 }
 
 function _createWedgeText(option, currentDegree, degreeIncrement) {
@@ -57,6 +69,45 @@ function generateClipPath(radius, angleStart, angleEnd) {
 
     // Generate and return the clip-path string
     return `polygon(${radius}% ${radius}%, ${x1}% ${y1}%, ${x2}% ${y2}%)`;
+}
+
+function generateRandomColor() {
+    return '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+}
+
+// Special function for drawing two "wedges"
+function drawTwoWedges(wheel, option, currentDegree) {
+    const element = document.createElement('span');
+    element.className = 'wedge';
+    if (currentDegree === 0) {
+        element.style.clipPath = 'polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%)';
+    } else {
+        element.style.clipPath = 'polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%)';
+    }
+
+    element.style.backgroundColor = generateRandomColor();
+
+    element.appendChild(_createTwoWedgeText(option, currentDegree));
+
+    wheel.appendChild(element); 
+}
+
+function _createTwoWedgeText(option, currentDegree) {
+    const innerElement = document.createElement('span');
+    innerElement.className = 'wedgeText';
+    innerElement.textContent = option;
+
+    if (currentDegree === 0) {
+        innerElement.style.left = `20%`;
+        innerElement.style.top = `50%`;
+        innerElement.style.textAlign = 'right';
+        innerElement.style.width = '150px';
+    } else {
+        innerElement.style.left = `55%`;
+        innerElement.style.top = `50%`;
+    }
+
+    return innerElement;
 }
 
 function spin() {
