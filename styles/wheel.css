@@ -51,3 +51,12 @@
 .wedgeText {
     position: absolute;
 }
+
+.randomControls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.optionBox {
+    border: 1px solid black;
+}

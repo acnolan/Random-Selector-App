@@ -1,14 +1,50 @@
 // Need to handle special conditions if less than 6 options
 // Ideally would like it to work with 4+, two special cases is more manageable
-const options = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6'
+const defaultOptions = [
+    'apple',
+    'banana',
+    'orange',
+    'grape'
 ];
 
+let options = [];
+
+function determineOptions() {
+    // TODO: Get options from query params or local storage
+    // If query params (share option)
+    // else if local storage (save option)
+    // else default options
+    options = defaultOptions;
+}
+
+function generateOptionList() {
+    options.forEach(option => {
+        createOption(option);
+    });
+}
+
+function createOption(option) {
+    const element = document.createElement('div');
+    const textInput = document.createElement('input');
+    textInput.type = 'text';
+    textInput.value = option;
+
+    const colorInput = document.createElement('input');
+    colorInput.type = 'color';
+    colorInput.value = '#ffffff';
+
+    element.appendChild(textInput);
+    element.appendChild(colorInput);
+
+    const optionBox = document.getElementById('optionBox');
+    optionBox.appendChild(element);
+}
+
+/**
+ * Spinner stuff
+ */
+
+// Create the spinner
 function setUpSpinner() {
     let currentDegree = 0;
     const degreeIncrement = 360 / options.length;
@@ -163,4 +199,6 @@ function calculateWinner(randomSpin) {
 }
 
 // Init the spinner
+determineOptions();
 setUpSpinner();
+generateOptionList();
