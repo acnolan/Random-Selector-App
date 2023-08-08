@@ -50,6 +50,7 @@
 
 .wedgeText {
     position: absolute;
+    max-width: 50px;
 }
 
 .randomControls {

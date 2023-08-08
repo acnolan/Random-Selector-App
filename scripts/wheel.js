@@ -1,10 +1,10 @@
 // Need to handle special conditions if less than 6 options
 // Ideally would like it to work with 4+, two special cases is more manageable
 const defaultOptions = [
-    'apple',
-    'banana',
-    'orange',
-    'grape'
+    {item: 'apple', color: generateRandomColor()},
+    {item: 'banana', color: generateRandomColor()},
+    {item: 'orange', color: generateRandomColor()},
+    {item: 'grape', color: generateRandomColor()}
 ];
 
 let options = [];
@@ -17,26 +17,62 @@ function determineOptions() {
     options = defaultOptions;
 }
 
+/**
+ * Option list
+ */
 function generateOptionList() {
-    options.forEach(option => {
-        createOption(option);
+    options.forEach((option, i) => {
+        createOption(option, i);
     });
+
+    const addNewDiv = document.createElement('div');
+    const addNew = document.createElement('button');
+    addNew.textContent = '+ Add New Item';
+
+    addNew.addEventListener('click', () => {
+        const newItem = {item: "", color: generateRandomColor()};
+        options.push(newItem);
+        createOption(newItem, options.length-1);
+        setUpSpinner();
+    });
+
+    addNewDiv.appendChild(addNew);
+
+    const optionBox = document.getElementById('addOptionDiv');
+    optionBox.appendChild(addNewDiv);
 }
 
-function createOption(option) {
+function createOption(option, i) {
     const element = document.createElement('div');
     const textInput = document.createElement('input');
     textInput.type = 'text';
-    textInput.value = option;
+    textInput.value = option.item;
+    textInput.addEventListener('change', e => {
+        options[i].item = e.target.value;
+        setUpSpinner();
+    });
 
     const colorInput = document.createElement('input');
     colorInput.type = 'color';
-    colorInput.value = '#ffffff';
+    colorInput.value = option.color.backgroundColor;
+    colorInput.addEventListener('change', e => {
+        options[i].color.backgroundColor = e.target.value;
+        setUpSpinner();
+    });
+
+    const removeInput = document.createElement('button');
+    removeInput.textContent = 'X';
+    removeInput.addEventListener('click', () => {
+        options.splice(options.findIndex(e => e === option), 1);
+        element.remove();
+        setUpSpinner();
+    });
 
     element.appendChild(textInput);
     element.appendChild(colorInput);
+    element.appendChild(removeInput);
 
-    const optionBox = document.getElementById('optionBox');
+    const optionBox = document.getElementById('optionsList');
     optionBox.appendChild(element);
 }
 
@@ -75,11 +111,11 @@ function createSingleElementWheel(wheel, option) {
     
     
     const text = document.createElement('span');
-    text.textContent = option;
+    text.textContent = option.item;
     text.className = 'wedgeText';
     element.appendChild(text);
 
-    const colors = generateRandomColor(); 
+    const colors = option.color;
     element.style.backgroundColor = colors.backgroundColor;
     text.style.color = colors.textColor;
     
@@ -96,7 +132,7 @@ function drawTwoWedges(wheel, option, currentDegree) {
         element.style.clipPath = 'polygon(0% 0%, 100% 0%, 100% 50%, 0% 50%)';
     }
 
-    const colors = generateRandomColor(); 
+    const colors = option.color; 
     element.style.backgroundColor = colors.backgroundColor;
 
     element.appendChild(_createWedgeText(option, currentDegree, 180, colors.textColor))
@@ -116,7 +152,7 @@ function createWedge(wheel, option, currentDegree, degreeIncrement) {
         element.style.height = '900px';
     }
 
-    const colors = generateRandomColor(); 
+    const colors = option.color;
     element.style.backgroundColor = colors.backgroundColor;
 
     wheel.appendChild(element);
@@ -128,7 +164,7 @@ function _createWedgeText(option, currentDegree, degreeIncrement, color) {
     const innerElement = document.createElement('span');
     innerElement.className = 'wedgeText';
     innerElement.style.color = color;
-    innerElement.textContent = option;
+    innerElement.textContent = option.item;
     // radians = degrees * (π / 180)
     const textRotation = (currentDegree + (0.5 * degreeIncrement)) * Math.PI / 180;
     innerElement.style.transform = `rotate(${(textRotation)}rad)`;
@@ -193,7 +229,7 @@ function calculateWinner(randomSpin) {
     for (let i = 0; i * degreeIncrement <= 360; i++) {
         const currentDegree = i * degreeIncrement;
         if (degreeFromZero >= currentDegree && degreeFromZero < currentDegree + degreeIncrement) {
-            return options[i];
+            return options[i].item;
         }
     }
 }
