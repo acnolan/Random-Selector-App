@@ -1,5 +1,9 @@
-// Need to handle special conditions if less than 6 options
-// Ideally would like it to work with 4+, two special cases is more manageable
+/**
+ * Functions for setting up and managing the random wheel
+ */
+
+const SPINNER = 'spinner';
+
 const defaultOptions = [
     {item: 'apple', color: generateRandomColor()},
     {item: 'banana', color: generateRandomColor()},
@@ -10,11 +14,13 @@ const defaultOptions = [
 let options = [];
 
 function determineOptions() {
-    // TODO: Get options from query params or local storage
-    // If query params (share option)
-    // else if local storage (save option)
-    // else default options
-    options = defaultOptions;
+    if (checkIfQueryParameters()) {
+        options = getQueryParameters();
+    } else if (checkIfLocallyStored(SPINNER)) {
+        options = loadLocalData(SPINNER);
+    } else {
+        options = defaultOptions;
+    }
 }
 
 /**
@@ -232,6 +238,21 @@ function calculateWinner(randomSpin) {
             return options[i].item;
         }
     }
+}
+
+/**
+ * Save and share
+ */
+function saveData () {
+    storeLocalData(SPINNER, options);
+}
+
+async function shareData () {
+    const newUrl = generateURLWithQueryParameters(options);
+    await navigator.clipboard.writeText(newUrl);
+    alert("Shareable URL copied to clipboard!");
+
+    window.location.href = newUrl;
 }
 
 // Init the spinner

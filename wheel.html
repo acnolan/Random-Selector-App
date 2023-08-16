@@ -3,6 +3,8 @@
     <head>
         <title>Spin the wheel!</title>
         <link rel="stylesheet" type="text/css" href="styles/wheel.css">
+        <script defer type="text/javascript" src="scripts/localStorageManager.js"></script>
+        <script defer type="text/javascript" src="scripts/queryParameterManager.js"></script>
         <script defer type="text/javascript" src="scripts/wheel.js"></script>
     </head>
     <body>
@@ -17,6 +19,8 @@
     
             <div>
                 <h3>Wedges</h3>
+                <button onclick="saveData()">SAVE OPTIONS</button>
+                <button onclick="shareData()">SHARE SPINNER</button>
                 <div class="optionBox">
                     <div id="addOptionDiv"></div>
                     <div id="optionsList"></div>
