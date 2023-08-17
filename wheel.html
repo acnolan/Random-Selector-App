@@ -9,7 +9,10 @@
     </head>
     <body>
         <h1>Spin the Wheel!</h1>
-
+        <div class="spinDiv">
+            <button id="spinButton" class="button" onclick="spin()">SPIN</button>
+        </div>
+        <h2 style="visibility: hidden;" id="winnerRow">Spin the wheel to add a winner</h2>
         <div class="randomControls">
             <div id="spinner" class="spinner">
                 <div id="wheel" class="wheel" style="background-color: black;">
@@ -19,15 +22,13 @@
     
             <div>
                 <h3>Wedges</h3>
-                <button onclick="saveData()">SAVE OPTIONS</button>
-                <button onclick="shareData()">SHARE SPINNER</button>
+                <button class="button" onclick="saveData()">SAVE OPTIONS</button>
+                <button class="button" onclick="shareData()">SHARE SPINNER</button>
                 <div class="optionBox">
                     <div id="addOptionDiv"></div>
                     <div id="optionsList"></div>
                 </div>
             </div>
         </div>
-
-        <button class="spin-button" onclick="spin()">SPIN</button>
     </body>
 </html>

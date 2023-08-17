@@ -1,7 +1,5 @@
 .spinner {
     position: relative;
-    width: 600px;
-    height: 600px; 
     display: flex;
     flex-shrink: 0;
     align-items: center;
@@ -15,7 +13,7 @@
     height: 32px;
     background: url('../images/leftChevron.svg') no-repeat;
     background-size: contain;
-    right: 60px;
+    right: -5%;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -26,13 +24,13 @@
 
 @keyframes animateArrow{
     50%{
-        right: 50px;
+        right: -10%;
     }
 }
 
 .wheel {
-    width: 70%;
-    height: 70%;
+    width: 420px;
+    height: 420px;
     position: relative;
     border-radius: 50%;
     margin: 10px;
@@ -61,4 +59,44 @@
 
 .optionBox {
     border: 1px solid black;
+}
+
+html {
+    font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    background-color: antiquewhite;
+}
+
+h1 {
+    color: #711ca7;
+}
+
+h1, h2 {
+    width: 100%;
+    text-align: center;
+}
+
+.spinDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.spinDiv .button {
+    min-width: 135px;
+}
+
+.button {
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 35px;
+    box-sizing: border-box;
+    background-color: grey;
+    cursor: pointer;
+    min-width: 180px;
+}
+
+.button:hover {
+    background: linear-gradient(darkgrey, grey);
 }

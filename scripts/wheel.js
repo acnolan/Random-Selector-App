@@ -4,6 +4,9 @@
 
 const SPINNER = 'spinner';
 
+const winnerRow = document.getElementById('winnerRow')
+let timeOut = undefined;
+
 const defaultOptions = [
     {item: 'apple', color: generateRandomColor()},
     {item: 'banana', color: generateRandomColor()},
@@ -214,6 +217,8 @@ function generateRandomColor() {
 }
 
 function spin() {
+    winnerRow.style.visibility = 'hidden';
+
     const min = 1080; // Spin at least 3 full circles
     const max = 10080; // Spin at most 30 times
 
@@ -223,9 +228,16 @@ function spin() {
 
     const element = document.getElementById('spinner');
     element.classList.remove('animate');
-    setTimeout(() => {
+    clearTimeout(timeOut);
+    timeOut = setTimeout(() => {
         element.classList.add('animate');
-        alert(`The winner is ${calculateWinner(randomSpin)}!`)
+
+        document.getElementById('spinButton').innerText = 'Spin Again';
+
+        const winner = calculateWinner(randomSpin);
+        winnerRow.style.visibility = 'visible';
+        winnerRow.style.color = winner.color.backgroundColor;
+        winnerRow.innerText = `The winner is ${winner.item}!`;
     }, 5000);
 }
 
@@ -235,7 +247,7 @@ function calculateWinner(randomSpin) {
     for (let i = 0; i * degreeIncrement <= 360; i++) {
         const currentDegree = i * degreeIncrement;
         if (degreeFromZero >= currentDegree && degreeFromZero < currentDegree + degreeIncrement) {
-            return options[i].item;
+            return options[i];
         }
     }
 }
