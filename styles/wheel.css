@@ -61,20 +61,6 @@
     border: 1px solid black;
 }
 
-html {
-    font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-    background-color: antiquewhite;
-}
-
-h1 {
-    color: #711ca7;
-}
-
-h1, h2 {
-    width: 100%;
-    text-align: center;
-}
-
 .spinDiv {
     width: 100%;
     display: flex;
@@ -83,20 +69,4 @@ h1, h2 {
 
 .spinDiv .button {
     min-width: 135px;
-}
-
-.button {
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 10px 35px;
-    box-sizing: border-box;
-    background-color: grey;
-    cursor: pointer;
-    min-width: 180px;
-}
-
-.button:hover {
-    background: linear-gradient(darkgrey, grey);
 }

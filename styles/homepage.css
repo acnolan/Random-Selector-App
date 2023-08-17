@@ -1,0 +1,9 @@
+p {
+    text-align: center;
+}
+
+.buttonRow {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 25px 0;
+}
