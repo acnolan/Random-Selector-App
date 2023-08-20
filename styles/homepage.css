@@ -1,0 +1,11 @@
+.subtitle {
+    text-align: center;
+    color: white;
+    display: block;
+    text-decoration: none;
+    margin: 1em 0;
+}
+
+.homepage .buttonRow {
+    flex-wrap: wrap;
+}

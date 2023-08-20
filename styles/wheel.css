@@ -1,0 +1,100 @@
+.spinner {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner:after {
+    position: absolute;
+    content: '';
+    width: 32px;
+    height: 32px;
+    background: url('../images/leftChevron.svg') no-repeat;
+    background-size: contain;
+    right: -5%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.spinner.animate:after{
+    animation: animateArrow 0.7s ease infinite;
+}
+
+@keyframes animateArrow{
+    50%{
+        right: -10%;
+    }
+}
+
+.wheel {
+    width: 420px;
+    height: 420px;
+    position: relative;
+    border-radius: 50%;
+    margin: 10px;
+    overflow: hidden;
+    transition: all ease 5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wedge {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+}
+
+.wedgeText {
+    position: absolute;
+    max-width: 80px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.randomControls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    overflow: hidden;
+}
+
+.optionBox {
+    border: 1px solid black;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 5px;
+    overflow: auto;
+    max-height: 300px;
+}
+
+.spinDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.spinDiv .button {
+    min-width: 135px;
+}
+
+.optionRow {
+    display: flex;
+    margin: 10px 0;
+}
+
+.optionRow .button {
+    padding: 5px;
+}
+
+.optionsList {
+    overflow: auto;
+    max-height: 300px;
+}
+
+@media only screen and (max-width: 768px) {
+    .randomControls {
+        overflow: visible;
+    }
+}
