@@ -31,11 +31,15 @@
     
             <div>
                 <h3>Wedges</h3>
-                <button class="button" onclick="saveData()">SAVE OPTIONS</button>
-                <button class="button" onclick="shareData()">SHARE SPINNER</button>
+                <div class="buttonRow">
+                    <button class="button" onclick="saveData()">SAVE OPTIONS</button>
+                    <button class="button" onclick="shareData()">SHARE SPINNER</button>
+                </div>
                 <div class="optionBox">
-                    <div id="addOptionDiv"></div>
                     <div id="optionsList"></div>
+                </div>
+                <div id="addOptionDiv">
+                    <button class="button" onclick="addNewOption()">+ Add New Item</button>
                 </div>
             </div>
         </div>

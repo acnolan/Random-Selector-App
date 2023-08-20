@@ -49,16 +49,23 @@
 
 .wedgeText {
     position: absolute;
-    max-width: 50px;
+    max-width: 80px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .randomControls {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    overflow: hidden;
 }
 
 .optionBox {
     border: 1px solid black;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 5px;
+    overflow: auto;
+    max-height: 300px;
 }
 
 .spinDiv {
@@ -69,4 +76,18 @@
 
 .spinDiv .button {
     min-width: 135px;
+}
+
+.optionRow {
+    display: flex;
+    margin: 10px 0;
+}
+
+.optionRow .button {
+    padding: 5px;
+}
+
+.optionsList {
+    overflow: auto;
+    max-height: 300px;
 }

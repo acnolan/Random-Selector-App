@@ -1,10 +1,11 @@
 html {
     font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-    background-color: antiquewhite;
+    background-color: #121212;
+    overflow-x: hidden;
 }
 
 h1 {
-    color: #711ca7;
+    color: #BB86FC;
 }
 
 h1, h2 {
@@ -17,13 +18,18 @@ h1, h2 {
     border: none;
     border-radius: 5px;
     color: white;
-    padding: 10px 35px;
+    padding: 10px 5px;
     box-sizing: border-box;
-    background-color: grey;
+    background-color: #711ca7;;
     cursor: pointer;
-    min-width: 180px;
 }
 
 .button:hover {
-    background: linear-gradient(darkgrey, grey);
+    background: linear-gradient(#BB86FC, #711ca7);
+}
+
+.buttonRow {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 25px 0;
 }

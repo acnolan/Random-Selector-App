@@ -8,10 +8,10 @@ const winnerRow = document.getElementById('winnerRow')
 let timeOut = undefined;
 
 const defaultOptions = [
-    {item: 'apple', color: generateRandomColor()},
-    {item: 'banana', color: generateRandomColor()},
-    {item: 'orange', color: generateRandomColor()},
-    {item: 'grape', color: generateRandomColor()}
+    {item: 'option 1', color: generateRandomColor()},
+    {item: 'option 2', color: generateRandomColor()},
+    {item: 'option 3', color: generateRandomColor()},
+    {item: 'option 4', color: generateRandomColor()}
 ];
 
 let options = [];
@@ -33,26 +33,18 @@ function generateOptionList() {
     options.forEach((option, i) => {
         createOption(option, i);
     });
+}
 
-    const addNewDiv = document.createElement('div');
-    const addNew = document.createElement('button');
-    addNew.textContent = '+ Add New Item';
-
-    addNew.addEventListener('click', () => {
-        const newItem = {item: "", color: generateRandomColor()};
+function addNewOption() {
+    const newItem = {item: `option ${options.length + 1}`, color: generateRandomColor()};
         options.push(newItem);
         createOption(newItem, options.length-1);
         setUpSpinner();
-    });
-
-    addNewDiv.appendChild(addNew);
-
-    const optionBox = document.getElementById('addOptionDiv');
-    optionBox.appendChild(addNewDiv);
 }
 
 function createOption(option, i) {
     const element = document.createElement('div');
+    element.className = 'optionRow';
     const textInput = document.createElement('input');
     textInput.type = 'text';
     textInput.value = option.item;
@@ -66,10 +58,12 @@ function createOption(option, i) {
     colorInput.value = option.color.backgroundColor;
     colorInput.addEventListener('change', e => {
         options[i].color.backgroundColor = e.target.value;
+        options[i].color.textColor = determineTextColor(e.target.value);
         setUpSpinner();
     });
 
     const removeInput = document.createElement('button');
+    removeInput.className = 'button';
     removeInput.textContent = 'X';
     removeInput.addEventListener('click', () => {
         options.splice(options.findIndex(e => e === option), 1);
@@ -96,7 +90,7 @@ function setUpSpinner() {
 
     const wheel = document.getElementById('wheel');
 
-    wheel.innerHTML = "";
+    wheel.innerHTML = '';
 
     options.forEach(option => {
         if (options.length > 2) {
@@ -204,16 +198,20 @@ function generateClipPath(radius, angleStart, angleEnd) {
 function generateRandomColor() {
     const backgroundColor = '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
 
+    return {
+        backgroundColor: backgroundColor,
+        textColor: determineTextColor(backgroundColor)
+    };
+}
+
+function determineTextColor(backgroundColor) {
     const r = parseInt(backgroundColor.substr(1, 2), 16);
     const g = parseInt(backgroundColor.substr(3, 2), 16);
     const b = parseInt(backgroundColor.substr(5, 2), 16);
 
     const brightness = (r * 0.299 + g * 0.587 + b * 0.114);
 
-    return {
-        backgroundColor: backgroundColor,
-        textColor: brightness > 130 ? '#000000' : '#FFFFFF',
-    };
+    return brightness > 130 ? '#000000' : '#FFFFFF';
 }
 
 function spin() {
@@ -262,7 +260,7 @@ function saveData () {
 async function shareData () {
     const newUrl = generateURLWithQueryParameters(options);
     await navigator.clipboard.writeText(newUrl);
-    alert("Shareable URL copied to clipboard!");
+    alert('Shareable URL copied to clipboard!');
 
     window.location.href = newUrl;
 }
