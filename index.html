@@ -13,21 +13,46 @@
     <meta name="description" content="Choosing stuff is hard! Here are some tools to make it easier.">
     <meta name="keywords" content="Randomizer, spinner, random, choice, hat, number, wheel">
     <title>Randomizer App</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/spinner.ico"/>
+
 </head>
 
 <body>
     <main id="main" class="homepage">
         <h1>Randomizer App</h1>
-        <p>Pick a tool (or have us choose one for you randomly!)</p>
+        <p class="subtitle">Pick a tool (or have us choose one for you randomly!)</p>
         <div class="buttonRow">
-            <a href="./wheel"><img alt="random wheel"></a>
-            <a href="./hat"><img alt="random hat"></a>
-            <a href="./dice"><img alt="roll dice"></a>
+            <div>
+                <a href="./wheel">
+                    <img height="200px" width="200px" src="./images/spinner.png" alt="random wheel">
+                </a>
+                <a href="./wheel" class="subtitle">Wheel</a>
+            </div>
+            <div>
+                <a href="#">
+                    <img height="200px" width="200px" src="./images/tbd.png" alt="random hat">
+                </a>
+                <a href="#" class="subtitle">Hat</a>
+            </div>
+            <div>
+                <a href="#">
+                    <img height="200px" width="200px" src="./images/tbd.png" alt="roll dice">
+                </a>
+                <a href="#" class="subtitle">Dice</a>
+            </div>
         </div>
         <div class="buttonRow">
-            <button class="button">Choose for me</button>
+            <button onclick="chooseOption()" title="To be implemented" class="button">Choose for me</button>
         </div>
     </main>
 </body>
 
 </html>
+
+<script>
+    function chooseOption() {
+        const options = ["./wheel"];
+        const randomNumber = Math.floor(Math.random() * options.length);
+        window.location.href = options[randomNumber];
+    }
+</script>

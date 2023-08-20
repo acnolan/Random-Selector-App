@@ -255,6 +255,8 @@ function calculateWinner(randomSpin) {
  */
 function saveData () {
     storeLocalData(SPINNER, options);
+    alert('Options should be saved and can be used next time you visit this page!');
+
 }
 
 async function shareData () {
