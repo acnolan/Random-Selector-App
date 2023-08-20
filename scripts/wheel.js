@@ -112,7 +112,6 @@ function createSingleElementWheel(wheel, option) {
     element.style.justifyContent = 'center';
     element.style.alignItems = 'center';
     
-    
     const text = document.createElement('span');
     text.textContent = option.item;
     text.className = 'wedgeText';
@@ -163,6 +162,7 @@ function createWedge(wheel, option, currentDegree, degreeIncrement) {
     element.appendChild(_createWedgeText(option, currentDegree, degreeIncrement, colors.textColor));
 }
 
+// Add the text to the wedges
 function _createWedgeText(option, currentDegree, degreeIncrement, color) {
     const innerElement = document.createElement('span');
     innerElement.className = 'wedgeText';
@@ -171,14 +171,16 @@ function _createWedgeText(option, currentDegree, degreeIncrement, color) {
     // radians = degrees * (π / 180)
     const textRotation = (currentDegree + (0.5 * degreeIncrement)) * Math.PI / 180;
     innerElement.style.transform = `rotate(${(textRotation)}rad)`;
-    const top = 20 * Math.sin(textRotation);
-    const left = 20 * Math.cos(textRotation);
+    const multiplier = window.innerWidth < 450 ? 15 : 20;
+    const top = multiplier * Math.sin(textRotation);
+    const left = multiplier * Math.cos(textRotation);
     innerElement.style.left = `${50 + left}%`;
     innerElement.style.top = `${50 + top}%`;
 
     return innerElement;
 }
 
+// Clip the div into a wedge shape
 function generateClipPath(radius, angleStart, angleEnd) {
     // Convert to radians
     let radStart = (angleStart * Math.PI) / 180;
@@ -204,6 +206,7 @@ function generateRandomColor() {
     };
 }
 
+// Decide if the text is white or black based on brightness
 function determineTextColor(backgroundColor) {
     const r = parseInt(backgroundColor.substr(1, 2), 16);
     const g = parseInt(backgroundColor.substr(3, 2), 16);
@@ -214,6 +217,7 @@ function determineTextColor(backgroundColor) {
     return brightness > 130 ? '#000000' : '#FFFFFF';
 }
 
+// Spin the wheel
 function spin() {
     winnerRow.style.visibility = 'hidden';
 
@@ -239,6 +243,7 @@ function spin() {
     }, 5000);
 }
 
+// Announce the winner
 function calculateWinner(randomSpin) {
     const degreeFromZero = 360 - (randomSpin % 360);
     const degreeIncrement = 360 / options.length;
@@ -253,12 +258,15 @@ function calculateWinner(randomSpin) {
 /**
  * Save and share
  */
+
+// Save to local storage
 function saveData () {
     storeLocalData(SPINNER, options);
     alert('Options should be saved and can be used next time you visit this page!');
 
 }
 
+// Save query parameters in URL
 async function shareData () {
     const newUrl = generateURLWithQueryParameters(options);
     await navigator.clipboard.writeText(newUrl);
@@ -267,7 +275,9 @@ async function shareData () {
     window.location.href = newUrl;
 }
 
-// Init the spinner
+/**
+ * Init the spinner
+ */
 determineOptions();
 setUpSpinner();
 generateOptionList();
