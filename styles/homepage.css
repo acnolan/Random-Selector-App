@@ -1,11 +1,11 @@
-.subtitle {
-    text-align: center;
-    color: white;
-    display: block;
-    text-decoration: none;
-    margin: 1em 0;
-}
-
 .homepage .buttonRow {
     flex-wrap: wrap;
+}
+
+.subtitle {
+    color: white;
+    display: block;
+    margin: 1em 0;
+    text-align: center;
+    text-decoration: none;
 }
